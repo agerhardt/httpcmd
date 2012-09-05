@@ -40,7 +40,6 @@ public abstract class Authentication {
         public void applyTo(Builder builder) {
             String authString = user + ":" + password;
             String base64 = DatatypeConverter.printBase64Binary(authString.getBytes());
-            System.out.println(base64);
             builder.header("Authorization", base64);
         }
     }
