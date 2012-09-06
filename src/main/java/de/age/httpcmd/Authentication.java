@@ -1,6 +1,7 @@
 package de.age.httpcmd;
 
 import com.sun.jersey.api.client.WebResource.Builder;
+import javax.ws.rs.core.HttpHeaders;
 import javax.xml.bind.DatatypeConverter;
 
 /**
@@ -40,7 +41,7 @@ public abstract class Authentication {
         public void applyTo(Builder builder) {
             String authString = user + ":" + password;
             String base64 = DatatypeConverter.printBase64Binary(authString.getBytes());
-            builder.header("Authorization", base64);
+            builder.header(HttpHeaders.AUTHORIZATION, base64);
         }
     }
 }
