@@ -1,4 +1,5 @@
 *.class
+nbactions.xml
 
 # Package Files #
 *.jar
