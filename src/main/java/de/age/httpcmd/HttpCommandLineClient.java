@@ -1,15 +1,22 @@
 package de.age.httpcmd;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import javax.ws.rs.core.MediaType;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
+
 import de.age.httpcmd.commands.AuthCommand;
 import de.age.httpcmd.commands.BaseCommand;
 import de.age.httpcmd.commands.ErrorCommand;
 import de.age.httpcmd.commands.ExitCommand;
 import de.age.httpcmd.commands.HttpCommandFactory;
 import de.age.httpcmd.util.EnhancedStringTokenizer;
-import java.util.*;
-import javax.ws.rs.core.MediaType;
 
 public class HttpCommandLineClient {
 
@@ -54,6 +61,9 @@ public class HttpCommandLineClient {
     private Command parseCommand(String nextLine) {
         EnhancedStringTokenizer tok = new EnhancedStringTokenizer(nextLine, " ", "\"");
         List<String> tokens = tok.getAllTokens();
+        if (tokens.size() == 0) {
+        	return ErrorCommand.UNKNOWNCOMMAND_FACTORY.createCommand(context, "");
+        }
         CommandFactory factory = commands.get(tokens.get(0));
         if (factory == null) {
             factory = ErrorCommand.UNKNOWNCOMMAND_FACTORY;

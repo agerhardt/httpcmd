@@ -3,7 +3,6 @@ package de.age.httpcmd.commands;
 import de.age.httpcmd.Command;
 import de.age.httpcmd.CommandFactory;
 import de.age.httpcmd.Context;
-import java.util.Map;
 
 public class BaseCommand implements Command {
 
@@ -11,6 +10,9 @@ public class BaseCommand implements Command {
 
         @Override
         public Command createCommand(Context context, String... args) {
+        	if (args.length < 2) {
+        		return new ErrorCommand("missing path from command");
+        	}
             return new BaseCommand(context, args[1]);
         }
     };
